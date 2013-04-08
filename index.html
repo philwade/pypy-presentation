@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+           
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+-->
+
+<html>
+  <head>
+    <title>PyPy</title>
+
+    <meta charset='utf-8'>
+    <script
+      src='http://html5slides.googlecode.com/svn/trunk/slides.js'></script>
+  </head>
+  
+  <style>
+    /* Your individual styles here, or just use inline styles if that’s
+       what you want. */
+  </style>
+
+  <body style='display: none'>
+
+    <section class='slides layout-regular template-default'>
+      
+      <!-- Your slides (<article>s) go here. Delete or comment out the
+           slides below. -->
+        
+        
+      
+      <article class="nobackground">
+        <h1>
+			PyPy
+        </h1>
+        <p>
+          Phil Wade
+          <br>
+        </p>
+      </article>
+
+      <article class="nobackground">
+        <h3>
+			Programming Languages
+        </h3>
+        <ul class="build">
+		  <li>
+		  	spec
+		  </li>
+          <li>
+		  	interpreter
+          </li>
+          <li>
+		  	compiler
+		  </li>
+        </ul>
+
+      </article>
+      <article class="nobackground">
+        <p>
+			How are some popular languages implemented?
+        </p>
+		<ul class="build">
+			<li>
+				Ruby - C
+			</li>
+			<li>
+				Java - C++
+			</li>
+			<li>
+				Go - C
+			</li>
+			<li>
+				JavaScript (V8) - C++
+			</li>
+			<li>
+				Python - C
+			</li>
+		</ul>
+      </article>
+
+      <article class="nobackground">
+	  	<p>
+			Python actually has several implementations.
+		</p>
+		<ul class="build">
+			<li>CPython - what most people mean when they say "Python"</li>
+			<li>IronPython - for the mono/.NET platform</li>
+			<li>Jython - written in Java, runs on JVM</li>
+			<li>Unladen Swallow - Optimized CPython, written by Google, discontinued</li>
+			<li>Psyco - an JIT for Python, written in C, discontinued</li>
+			<li>PyPy - Python in Python</li>
+		</ul>
+      </article>
+
+      <article class="nobackground">
+	  	<p>C is hard, let's go shopping</p>
+		<ul class="build">
+			<li>PyPy is billed as Python in Python</li>
+			<li>An academic project, inspired by Psyco, started in 2003</li>
+			<li>The project has two pieces - RPython Toolchain and PyPy</li>
+			<li>PyPy is the interpreter written in RPython, compiled by the RPython toolchain</li>
+		</ul>
+      </article>
+
+      <article class="nobackground">
+	  	<p>
+			RPython
+		</p>
+		<ul class="build">
+			<li>So, I sort of lied when I said Python</li>
+			<li>Specific subset of Python</li>
+			<li>Suited for static analysis</li>
+			<li>Variables must keep type</li>
+			<li>Can't create classes at runtime</li>
+			<li>For loops only with built in data structures</li>
+		</ul>
+      </article>
+
+      <article class="nobackground">
+	  	<p>What does the toolchain do?</p>
+		<ul class="build">
+			<li>The tool chain does a load of analysis</li>
+			<li>Generates an efficient executable for the target platform</li>
+			<li>Currently supported: C/POSIX, .NET, JVM</li>
+			<li>Automagically created JIT within the executable</li>
+		</ul>
+      </article>
+
+      <article class="nobackground">
+	  	<h1>So, why PyPy?</h1>
+		<p><img class="centered" src="images/speed.gif"/></p>
+      </article>
+
+	  <article class="nobackground">
+	  	<h3>Speed!</h3>
+		<ul class="build">
+			<li>PyPy is <i>fast</i></li>
+			<li>Best performance gains on cpu bound tasks</li>
+			<li><a href="http://speed.pypy.org/">http://speed.pypy.org/</a></li>
+			<li>Example</li>
+		</ul>
+	  </article>
+
+	  <article class="nobackground">
+	  	<p>Tradeoffs</p>
+		<ul class="build">
+			<p><img src="images/slow.gif"/></p>
+			<li>Slower at some things</li>
+			<li>Compatibility</li>
+		</ul>
+	  </article>
+
+	  <article class="nobackground">
+	  	<p>Slower</p>
+		<ul class="build">
+			<li>Tests, quick running code</li>
+			<li>JIT needs time to warm up</li>
+			<li>Things CPython implements in pure C</li>
+			<li>RPython re-implementations have some trouble keeping up</li>
+			<li>Big Dicts (maybe)</li>
+			<li>Profile to find out</li>
+			<li>Example</li>
+		</ul>
+	  </article>
+
+	  <article class="nobackground">
+	  	<p>What doesn't it do?</p>
+		<ul class="build">
+			<li>Py3k</li>
+			<li>NumPy</li>
+			<li>Python C API</li>
+			<li>A few little coding quirks</li>
+		</ul>
+	  </article>
+
+	  <article class="nobackground">
+	  	<p>Is it ready for production?</p>
+		<ul class="build">
+			<li>Quora is the only one to admit using</li>
+			<li>Certainly not a drop-in change</li>
+			<li>Check your own library compatibility</li>
+		</ul>
+	  </article>
+
+	<article class="nobackground">
+		<p>Other neat things</p>
+		<ul class="build">
+			<li>Did I mention magical JIT?</li>
+			<li>Hippy VM - PHP by Facebook with RPython</li>
+			<li>Topaz - Ruby written in RPython</li>
+			<li>Even more languages - Prolog, Smalltalk, Javascript, Io, Scheme, Gameboy</li>
+		</ul>
+	</article>
+
+	<article class="nobackground">
+		<p>Resources/Sources</p>
+		<ul>
+			<li>http://pypy.org/</li>
+			<li>http://morepypy.blogspot.com/</li>
+			<li>https://github.com/philwade/pypy-presentation</li>
+		</ul>
+	</article>
+    </section>
+
+  </body>
+</html>

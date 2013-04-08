@@ -1,0 +1,114 @@
+PyPy
+
+Phil Wade
+
+--
+
+Programming Languages - what are they?
+
+A specification
+An interpeter
+A compiler
+
+Just programs that interpet code.
+Written like any other program - in code.
+
+--
+
+There is a pattern in here...
+
+Python - C
+Ruby - C
+Java - C++
+
+--
+Python actually has quite a few different interpeters.
+
+CPython - what most people mean when they say "Python"
+IronPython - for the mono/.NET platform
+Jython - written in Java, runs on JVM
+Unladen Swallow - Optimized CPython, written by Google, discontinued
+Psyco - an JIT for Python, written in C, discontinued
+PyPy - Python in Python
+--
+C is hard, let's go shopping
+
+PyPy is an implementation of Python in Python
+An academic project, inspired by Psyco
+The project has two pieces - RPython Toolchain and PyPy
+PyPy is the interpetor written in RPython, compiled by the RPython toolchain
+
+--
+
+RPython
+
+Is a subset of Python
+{code}
+well suited to static analysis
+
+Rules
+variables can only contain a single type
+module level globals are considered constants
+run time class creation not allowed
+for loops only for built in structures
+
+--
+RPython Toolchain
+
+Goes through a series of steps
+Translates the code into an efficient version for the target platform
+- currently support C, .NET, JVM targets
+Generates a JIT from the interpetor implementation, automagically
+
+--
+
+More about how the toolchain builds the stuff it does
+
+analysis -> generation -> compilation -> etc
+--
+
+That's nice, but who cares?
+
+SPEED
+...some times
+
+some benchmarks
+
+--
+Fast
+
+ pwade pwade-mac Euler $ time python euler10.py
+ 142913828922
+
+ real    0m28.222s
+ user    0m28.203s
+ sys     0m0.017s
+ pwade pwade-mac Euler $ time pypy euler10.py
+ 142913828922
+
+ real    0m2.776s
+ user    0m2.758s
+ sys     0m0.016s
+
+get the best performance differences from cpu bound stuff as opposed to file/io stuff
+--
+Slow
+
+Tests, short things - JIT needs time to warm up
+Things that CPython implements in pure C
+They are re-done in Python typically and the JIT can't always match
+
+Slow example
+--
+What can't it currently do?
+
+Python 3
+NumPy
+--
+Who uses it?
+--
+Other neat things
+Also, did I mention it generates a JIT *for you*
+Topaz
+a ruby implementation on top of RPython
+The Php RPython implementation
